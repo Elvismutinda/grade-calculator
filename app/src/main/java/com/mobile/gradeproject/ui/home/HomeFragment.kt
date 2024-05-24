@@ -2,6 +2,8 @@ package com.mobile.gradeproject.ui.home
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +40,27 @@ class HomeFragment : Fragment() {
         val reset: Button = binding.reset
         val result: TextView = binding.grade
         val buttonLayout: LinearLayout = binding.buttonLayout
+
+        // TextWatcher to clear error message when user types
+        subject.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                subject.error = null
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        marks.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                marks.error = null
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         // calculate button click event
         calculate.setOnClickListener {
